@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Data</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Add Data</h1>
+<div class="container">
+  <form action="" method="post">
+    <div class="row">
+      <div class="col-25">
+        <label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" for="String">String</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="String" name="String" placeholder="String">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" for="Integer">Integer</label>
+      </div>
+      <div class="col-75">
+        <input type="number" id="Integer" name="Integer" placeholder="Integer">
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" for="Float">Float</label>
+        </div>
+        <div class="col-75">
+            <input type="number" id="Float" name="Float" placeholder="Float" step="0.01">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" for="Date">Date</label>
+        </div>
+        <div class="col-75">
+            <input type="date" id="Date" name="Date" placeholder="End Date">
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" for="Boolean">Boolean</label>
+      </div>
+      <div class="col-75">
+        <select id="Boolean" name="Boolean">
+            <option style="font-family: Verdana, Geneva, Tahoma, sans-serif;" value="" disabled selected hidden>Choose The Boolean...</option>
+            <option style="font-family: Verdana, Geneva, Tahoma, sans-serif;" value="True">True</option>
+            <option style="font-family: Verdana, Geneva, Tahoma, sans-serif;" value="False">False</option>
+        </select>
+      </div>
+    </div>
+    <div class="row" style="color: white;">
+      <input style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: aliceblue;" type="submit" value="Submit">
+    </div>
+  </form>
+</div>
+</body>
+</html>

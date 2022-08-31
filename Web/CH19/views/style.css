@@ -1,0 +1,117 @@
+body {
+    background-color: white;
+    margin: 100px;
+}
+
+table {
+    width: 100%;
+}
+
+table, 
+th, 
+td {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    padding: 3px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+input[type=text], input[type=number], input[type=date], select, textarea {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: blue;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
+}
+
+input[type=submit]:hover {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: blue;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+.button {
+  background-color: blue; 
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: whitesmoke;
+  display: block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+
+.button2 {
+  border-radius: 2px;
+  background-color: green;
+}
+
+.button3 {
+  border-radius: 2px;
+  background-color: red;
+}

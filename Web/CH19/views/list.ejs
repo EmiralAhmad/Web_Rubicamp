@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>BREAD(Browse, Read, Edit Add, Delete)</h1>
+    <h2>Filters</h2>
+    <div class="container">
+  <form action="" method="post">
+    <div class="row">
+        <div class="col-25">
+            <label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" for="number">ID</label>
+        </div>
+        <div class="col-75">
+            <input type="number" id="ID" name="ID" placeholder="ID">
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" for="String">String</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="String" name="String" placeholder="String">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" for="Integer">Integer</label>
+      </div>
+      <div class="col-75">
+        <input type="number" id="Integer" name="Integer" placeholder="Integer">
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" for="Float">Float</label>
+        </div>
+        <div class="col-75">
+            <input type="number" id="Float" name="Float" placeholder="Float" step="0.01">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" for="Date">Date</label>
+        </div>
+        <div class="col-75">
+            <input type="date" id="Date" name="Date" placeholder="End Date">
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" for="Boolean">Boolean</label>
+      </div>
+      <div class="col-75">
+        <select id="Boolean" name="Boolean">
+            <option style="font-family: Verdana, Geneva, Tahoma, sans-serif;" value="" disabled selected hidden>Choose The Boolean...</option>
+            <option style="font-family: Verdana, Geneva, Tahoma, sans-serif;" value="True">True</option>
+            <option style="font-family: Verdana, Geneva, Tahoma, sans-serif;" value="False">False</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <input style="font-family: Verdana, Geneva, Tahoma, sans-serif;" type="submit" value="Search">
+    </div>
+    <div style="overflow-x:auto;">
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>String</th>
+      <th>Integer</th>
+      <th>Float</th>
+      <th>Date</th>
+      <th>Boolean</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+        <% data.forEach((item, index) => { %>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><%= item.String %></td>
+      <td><%= item.Integer %></td>
+      <td><%= item.Float %></td>
+      <td><%= item.Date %></td>
+      <td><%= item.Boolean %></td>
+      <td>
+        <button class="button button2" ><a href="/edit/<%= index %>">Edit</a></button> 
+        <button class="button button3" ><a href="/delete/<%= index %>">Delete</a></button>
+      </td>
+    </tr>
+    <% }) %>
+    </tbody>
+  </table>
+  <button class="button">
+        <a href="/add">Add</a>
+  </button>
+</div>
+
+</body>
+</html>
