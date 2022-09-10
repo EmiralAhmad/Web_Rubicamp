@@ -59,24 +59,6 @@ module.exports = function (db) {
     });
   });
 
-  // function updateDb(string, integer, float, date, boolean, id) {
-  //   db.query(
-  //     `UPDATE exam SET
-  // string = ?,
-  // integerinput = ?,
-  // floatinput = ?,
-  // dateinput = ?,
-  // booleaninput = ?
-  // WHERE id = ?`,
-  //     [string, integer, float, date, boolean, id],
-  //     (err, rows) => {
-  //       if (err) {
-  //         return console.error(err.message);
-  //       }
-  //     }
-  //   );
-  // }
-
   router.get('/add', function (req, res, next) {
     res.render('form');
   });

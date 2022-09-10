@@ -1,0 +1,163 @@
+<html>
+  <head>
+    <title>Scoresheet Announcement</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="card-header" style="text-align: center">
+          <h1>Scoresheet Announcement</h1>
+        </div>
+        <div class="card-body">
+          <form onsubmit=" return saveData(event)">
+            <div class="row mb-3">
+              <label for="name" class="col-sm-2 col-form-label">Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="scores" class="col-sm-2 col-form-label">Scores</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="scores" name="scores" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="grade" class="col-sm-2 col-form-label">Grade</label>
+              <div class="col-sm-10">
+                <input type="number" step="0.01" class="form-control" id="grade" name="grade" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="date" class="col-sm-2 col-form-label">Exam Date</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" id="date" name="date" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="condition" class="col-sm-2 col-form-label">Condition</label>
+              <div class="col-sm-10">
+                <select name="condition" id="condition" class="form-control">
+                  <option value="" disabled selected hidden>-Choose The Condition-</option>
+                  <option value="false">Retake</option>
+                  <option value="true">Done</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" >Save</button>
+          </form>
+        </div>
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Scores</th>
+              <th>Grade</th>
+              <th>Exam Date</th>
+              <th>Condition</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="body-users"></tbody>
+        </table>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+    <script>
+      let idEdit = null;
+      const readData = () => {
+        fetch('http://localhost:3000/users')
+          .then((response) => response.json())
+          .then((data) => {
+            let html = '';
+            data.forEach((item, index) => {
+              html += `
+               <tr>
+              <td>${index + 1}</td>
+              <td>${item.name}</td>
+              <td>${item.scores}</td>
+              <td>${item.grade}</td>
+              <td>${item.date}</td>
+              <td>${item.condition}</td>
+              <td>
+                <button type="button" class="btn btn-success" onclick='editData(${JSON.stringify(item)})'>Edit</button>
+                <button type="button" class="btn btn-danger" onclick="removeData('${item._id}')">Remove</button>
+              </td>
+            </tr>
+              `;
+            });
+            document.getElementById('body-users').innerHTML = html;
+          });
+      };
+
+      const saveData = (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const scores = document.getElementById('scores').value;
+        const grade = document.getElementById('grade').value;
+        const date = document.getElementById('date').value;
+        const condition = document.getElementById('condition').value;
+
+        if(idEdit == null){
+        fetch('http://localhost:3000/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, scores, grade, date, condition }),
+        })
+          .then((response) => response.json()).then((data) => {
+            readData();
+          })
+          idEdit = null;
+        } else {
+          fetch(`http://localhost:3000/users/${idEdit}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, scores, grade, date, condition }),
+        })
+          .then((response) => response.json()).then((data) => {
+            readData();
+          });
+        };
+          
+        document.getElementById('name').value = ''
+        document.getElementById('scores').value = ''
+        document.getElementById('grade').value = ''
+        document.getElementById('date').value = ''
+        document.getElementById('condition').value = ''
+
+        return false;
+      };
+
+      const removeData = (id) => {
+        fetch(`http://localhost:3000/users/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then((response) => response.json()).then((data) => {
+            readData();
+          })
+      }
+
+      const editData = (user) => {
+        idEdit = user._id
+        document.getElementById('name').value = user.name
+        document.getElementById('scores').value = user.scores
+        document.getElementById('grade').value = user.grade
+        document.getElementById('date').value = user.date
+        document.getElementById('condition').value = user.condition
+      }
+
+      readData();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,349 @@
+<html>
+  <head>
+    <title>Scoresheet Announcement</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="card-header" style="text-align: center">
+          <h1>Scoresheet Announcement</h1>
+        </div>
+        <div class="card-body">
+          <form id="form-user-search">
+            <div class="row mb-3">
+              <label for="name" class="col-sm-2 col-form-label">Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="s-name" name="name" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="scores" class="col-sm-2 col-form-label">Scores</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="s-scores" name="scores" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="grade" class="col-sm-2 col-form-label">Grade</label>
+              <div class="col-sm-10">
+                <input type="number" step="0.01" class="form-control" id="s-grade" name="grade" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="date" class="col-sm-2 col-form-label">Exam Date</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" id="s-date" name="date" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="condition" class="col-sm-2 col-form-label">Condition</label>
+              <div class="col-sm-10">
+                <select name="condition" id="s-condition" class="form-control">
+                  <option value="" disabled selected hidden>-Choose The Condition-</option>
+                  <option value="false">Retake</option>
+                  <option value="true">Done</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" >Search</button>
+            <button type="button" class="btn btn-warning" onclick="resetSearch()">Reset</button>
+          </form>
+        </div>
+        <table id="table-users" class="table table-stripped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Scores</th>
+              <th>Grade</th>
+              <th>Exam Date</th>
+              <th>Condition</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+<nav id="pagination-view" aria-label="Page navigation">
+
+</nav>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary" onclick="addData()">
+            Add
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <form id="form-user">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="$('#modal-delete').modal('hide')"></button>
+      </div>
+      <div class="modal-body">
+                  
+            <div class="row mb-3">
+              <label for="name" class="col-sm-2 col-form-label">Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="scores" class="col-sm-2 col-form-label">Scores</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="scores" name="scores" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="grade" class="col-sm-2 col-form-label">Grade</label>
+              <div class="col-sm-10">
+                <input type="number" step="0.01" class="form-control" id="grade" name="grade" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="date" class="col-sm-2 col-form-label">Exam Date</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" id="date" name="date" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="condition" class="col-sm-2 col-form-label">Condition</label>
+              <div class="col-sm-10">
+                <select name="condition" id="condition" class="form-control">
+                  <option value="" disabled selected hidden>-Choose The Condition-</option>
+                  <option value="false">Retake</option>
+                  <option value="true">Done</option>
+                </select>
+              </div>
+            </div>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#modal-form').modal('hide')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="$('#modal-delete').modal('hide')"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to remove ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="$('#modal-delete').modal('hide')">No</button>
+        <button id="btn-deleted" type="button" class="btn btn-primary">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script>
+      let idEdit = null;
+      let idDeleted = null;
+
+      let params = {
+        page: 1,
+        sortBy: '_id',
+        sortMode: 1
+      }
+
+      const resetSearch = () => {
+        $('#form-user-search').trigger('reset')
+        params = {
+          page: 1,
+          sortBy: '_id',
+          sortMode: 'asc'
+      }
+      readData()
+    }
+
+      $(document).ready(function(){
+        readData()
+
+        $('#form-user').submit(function(event){
+            event.preventDefault()
+            saveData()
+        })
+
+        $('#form-user-search').submit(function(event){
+            event.preventDefault()
+            const name = $('#s-name').val()
+            const scores = $('#s-scores').val()
+            const grade = $('#s-grade').val()
+            const date = $('#s-date').val()
+            const condition = $('#s-condition').val()
+            params = {...params, name, scores, grade, date, condition, page: 1}
+            readData()
+        })
+
+
+        $('#table-users').on('click', '.btn-delete', function(){
+           idDeleted = $(this).attr('dataid')
+           $('#modal-delete').modal('show')
+        })
+        
+
+        $('#btn-deleted').click(function(){
+            removeData(idDeleted)
+            $('#modal-delete').modal('hide')
+            idDeleted = null;
+        })
+      })
+
+      const pagination = (page, pages) => {
+        let html = `<ul class="pagination">
+    <li class="page-item${page == 1 ? ' disabled' : ''}">
+      <a class="page-link" href="javascript:void(0)" aria-label="Previous" onclick="changePage(${page - 1})">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+        `
+        for (let i = 1; i <= pages; i++) {
+        html += `<li class="page-item${page == i ? ' active': ''}"><a class="page-link" href="javascript:void(0)" onclick="changePage(${i})">${i}</a></li>`
+        }
+        html += `
+        <li class="page-item${page == pages ? ' disabled' : ''}">
+      <a class="page-link" href="javascript:void(0)" aria-label="Next" onclick="changePage(${page + 1})">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+        `
+        $('#pagination-view').html(html)
+      }
+
+      const addData = () => {
+        $('#modal-form').modal('show')
+        idEdit = null;
+        $('#name').val('')
+        $('#scores').val('')
+        $('#grade').val('')
+        $('#date').val('')
+        $('#condition').val('')
+      }
+
+
+      const readData = () => {
+        $.ajax({
+            url: '/users',
+            method: 'GET',
+            dataType: 'json',
+            data: params
+        }).done(({ data, page, pages, offset, sortBy, sortMode }) => {
+            let html = '';
+            let htmlHead = '';
+            
+            data.forEach((item, index, sortBy, sortMode) => {
+              html += `
+            <tr>
+              <td>${index + 1 + offset}</td>
+              <td>${item.name}</td>
+              <td>${item.scores}</td>
+              <td>${item.grade}</td>
+              <td>${item.date}</td>
+              <td>${item.condition}</td>
+              <td>
+                <button type="button" class="btn btn-success" onclick='editData(${JSON.stringify(item)})'>Edit</button>
+                <button type="button" class="btn btn-danger btn-delete" dataid="${item._id}">Remove</button>
+              </td>
+            </tr>
+              `
+            })
+            $('#table-users tbody').html(html)
+            pagination(page, pages)
+
+
+          }).fail((err) => {
+            alert(err)
+          })
+      }
+
+      const changePage = (page) => {
+        params.page = page
+        readData()
+      }
+
+      const saveData = () => {
+        const name = $('#name').val()
+        const scores = $('#scores').val()
+        const grade = $('#grade').val()
+        const date = $('#date').val()
+        const condition = $('#condition').val()
+
+        if(idEdit == null){
+          $.ajax({
+            url: '/users',
+            method: 'POST',
+            dataType: 'json',
+            data: {name, scores, grade, date, condition}
+          }).done((data) => {
+            readData();
+          }).fail((err)=> {
+            alert(err)
+          })
+        } else {
+          $.ajax({
+            url: `/users/${idEdit}`,
+            method: 'PUT',
+            dataType: 'json',
+            data: {name, scores, grade, date, condition}
+          }).done((data) => {
+            readData();
+          }).fail((err)=> {
+            alert(err)
+          })
+          idEdit = null;
+        }
+        $('#name').val('')
+        $('#scores').val('')
+        $('#grade').val('')
+        $('#date').val('')
+        $('#condition').val('')
+        $('#modal-form').modal('hide')
+      };
+
+      const removeData = (id) => {
+        $.ajax({
+            url: `/users/${id}`,
+            method: 'DELETE',
+            dataType: 'json'
+        }).done((data) => {
+            readData();
+        }).fail((err)=> {
+            alert(err)
+        })
+      }
+
+      const editData = (user) => {
+        idEdit = user._id
+        $('#name').val(user.name)
+        $('#scores').val(user.scores)
+        $('#grade').val(user.grade)
+        $('#date').val(user.date)
+        $('#condition').val(user.condition)
+        $('#modal-form').modal('show')
+      }
+
+    </script>
+  </body>
+
+</html>
